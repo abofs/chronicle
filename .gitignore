@@ -1,0 +1,9 @@
+# dependencies
+/node_modules/
+
+#logs
+/logs/*
+
+# ide
+.vscode/*
+*.vsix
