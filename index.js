@@ -2,7 +2,7 @@ import { promises as fsp } from 'fs';
 import Color from './color.js';
 
 const defaultOptions = {
-  logToFileByDefault: false, // default setting (overrideable by logToFile param)
+  logToFileByDefault: false, // default setting (overridable by logToFile param)
   logTimestamp: false, // option to include timestamp in console logs
   path: 'logs/', // default log directory (relative to main project file that runs your app)
   prefix: '',
@@ -106,7 +106,7 @@ export default class Chronicle {
   // attempts to create file and/or directory if they don't already exist
   async validateFileAndDirectory(targetLog) {
     const { path } = this.options;
-    const errorMethod = this.error ? this.error : console.error; // prefer native emethod unless removed by user
+    const errorMethod = this.error ? this.error : console.error; // prefer native method unless removed by user
 
     /*
      * TODO: Fix known bug

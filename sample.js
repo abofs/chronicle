@@ -13,7 +13,7 @@ function defaultSample() {
 
   chronicle.info('Info: sample application has started');
   chronicle.warn('Warning: this is just a sample');
-  chronicle.error('Error: no appliation logic detected', true); // passes true in order to log to logs/error.log file
+  chronicle.error('Error: no application logic detected', true); // passes true in order to log to logs/error.log file
   chronicle.debug(chronicle.color.types, true);
 }
 
@@ -32,7 +32,7 @@ function customSystemLogsSample() {
 
   chronicle.blue('Info: using custom method blue, sample application has started');
   chronicle.yellow('Warning: using custom method yellow, this is just a sample');
-  chronicle.red('Error: using custom method red, no appliation logic detected', false);
+  chronicle.red('Error: using custom method red, no application logic detected', false);
 }
 
 /*
@@ -50,7 +50,7 @@ function customOptionsSample() {
 
   chronicle.info('Info: sample application has started');
   chronicle.warn('Warning: this is just a sample');
-  chronicle.error('Error: no appliation logic detected');
+  chronicle.error('Error: no application logic detected');
 }
 
 /*
