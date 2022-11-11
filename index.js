@@ -19,8 +19,12 @@ const defaultOptions = {
 
 export default class Chronicle {
   constructor(options = defaultOptions) {
-    options = {...defaultOptions, ...options};
+    options = {
+      ...defaultOptions,
+      ...options,
+    };
     this.options = options;
+    this.sanitizeOptions();
 
     const { additionalLogs, systemLogs } = options;
     const logs = {
@@ -49,7 +53,7 @@ export default class Chronicle {
   createConvenienceMethod(type) {
     this[type] = (content, logToFile, overwrite = false) => {
       // set logToFile default based on class options when not set
-      if (!arguments[1]) logToFile = this.logToFileByDefault;
+      if (!arguments[1]) logToFile = this.options.logToFileByDefault;
 
       // treat overwrite default as true for log type "debug"
       if (type === 'debug' && !arguments[3]) overwrite = true;
@@ -90,7 +94,6 @@ export default class Chronicle {
     this.writeToFile('debug', JSON.stringify(content, null, 2), overwrite);
   }
 
-  // conditionally logs to file
   async writeToFile(type, content, overwrite) {
     const targetLog = `${this.options.path}${type}.log`;
     await this.validateFileAndDirectory(targetLog);
@@ -103,23 +106,39 @@ export default class Chronicle {
   // attempts to create file and/or directory if they don't already exist
   async validateFileAndDirectory(targetLog) {
     const { path } = this.options;
+    const errorMethod = this.error ? this.error : console.error; // prefer native emethod unless removed by user
+
+    /*
+     * TODO: Fix known bug
+     * Due to the asynchronous nature of these calls, when trying to run log write files at the same time,
+     * we will encounter some issues, because fsp.access will fail while mkdir or writeFile is pending.
+     * There are a few different ways to go about this, i think creating a queue system for matching path/targetLogs
+     * can mitigate this edge case, while still allowing other future logs to write asynchronously.
+     *
+     * We do NOT want to fix this by removing the async feature.
+     */
+    const tempNotice = 'If directories are being created, you can ignore this error';
 
     await fsp.access(path).catch(() => {
-      try {
-        fsp.mkdir(path);
-      } catch (e) {
-        this.error('Failed to create configured directory for log files:', path);
-        throw (e);
-      }
+      fsp.mkdir(path).catch(() => {
+        errorMethod(`Failed to create configured directory for log files: ${path} (${tempNotice})`);
+      });
     });
 
     await fsp.access(targetLog).catch(() => {
-      try {
-        fsp.writeFile(targetLog, '');
-      } catch (e) {
-        this.error('Failed to create log file:', targetLog);
-        throw (e);
-      }
+      fsp.writeFile(targetLog, '').catch(() => {
+        errorMethod(`Failed to create log file: ${targetLog} (${tempNotice})`);
+      });
     });
+  }
+
+  // method to conditionally sanitize user configuration input
+  sanitizeOptions() {
+    const { path } = this.options;
+
+    // force path property to contain a trailing "/"
+    if (path[path.length - 1] !== '/') {
+      this.options.path += '/';
+    }
   }
 }

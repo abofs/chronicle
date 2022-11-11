@@ -2,7 +2,7 @@
  * Chronicle usage samples
  */
 
-import Chronicle from '../index.js';
+import Chronicle from './index.js';
 
 /*
  * Default settings (Out of the box)
@@ -24,15 +24,15 @@ function customSystemLogsSample() {
   // instantiate chronicle with custom system logs
   const chronicle = new Chronicle({
     systemLogs: {
-        blue: '#007cae',
-        yellow: '#ae8f00', // bright orange
-        red: 'red'
-    }
+      blue: '#007cae',
+      yellow: '#ae8f00', // bright orange
+      red: 'red',
+    },
   });
 
   chronicle.blue('Info: using custom method blue, sample application has started');
   chronicle.yellow('Warning: using custom method yellow, this is just a sample');
-  chronicle.red('Error: using custom method red, no appliation logic detected');
+  chronicle.red('Error: using custom method red, no appliation logic detected', false);
 }
 
 /*
@@ -43,7 +43,7 @@ function customOptionsSample() {
   const chronicle = new Chronicle({
     logToFileByDefault: true,
     logTimestamp: true,
-    path: 'custom-logs/',
+    path: 'custom-logs', // purposely didn't include trailing "/" to test input sanitizer
     prefix: '--------------------------------------------------------------- \n',
     suffix: '\n=============================================================== \n',
   });
@@ -58,11 +58,7 @@ function customOptionsSample() {
  */
 function additionalLogsSample() {
   // instantiate chronicle with additional logs, and advanced color setting
-  const chronicle = new Chronicle({
-    additionalLogs: {
-        question: 'green'
-    }
-  });
+  const chronicle = new Chronicle({ additionalLogs: { question: 'green' }});
 
   // create additional log with advanced direct chalk configuration
   chronicle.setColorForType('query', chronicle.chalk().black.bgGreen);
