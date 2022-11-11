@@ -1,4 +1,6 @@
 import { promises as fsp } from 'fs';
+import { fileURLToPath } from 'url';
+import projectPath from 'path';
 import Color from './color.js';
 
 const defaultOptions = {
@@ -50,16 +52,21 @@ export default class Chronicle {
     this.createConvenienceMethod(type);
   }
 
+  // proxy through `logAction` method in order to set defaults based on argument presence
   createConvenienceMethod(type) {
-    this[type] = (content, logToFile, overwrite = false) => {
-      // set logToFile default based on class options when not set
-      if (!arguments[1]) logToFile = this.options.logToFileByDefault;
+    this[type] = (content, logToFile, overwrite = false) =>
+      this.logAction(type, content, logToFile, overwrite);
+  }
 
-      // treat overwrite default as true for log type "debug"
-      if (type === 'debug' && !arguments[3]) overwrite = true;
+  // validates params and sets configuration-based defaults for logging
+  logAction(type, content, logToFile, overwrite) {
+    // set logToFile default based on class options when not set
+    if (!arguments[2]) logToFile = this.options.logToFileByDefault;
 
-      return this.log(content, type, logToFile, overwrite);
-    };
+    // treat overwrite default as true for log type "debug"
+    if (type === 'debug' && !arguments[3]) overwrite = true;
+
+    return this.log(content, type, logToFile, overwrite);
   }
 
   // exposes chalk for custom color options via setColorForType
@@ -87,7 +94,7 @@ export default class Chronicle {
 
   // direct hardcoded debug method (log to file functionality is limited)
   async debug(content, logToFile = false, overwrite = true) {
-    console.dir(content, { depth: null }); // eslint-disable-line no-console
+    console.dir(content, { depth: 6 }); // eslint-disable-line no-console
 
     if (!logToFile) return;
 
@@ -134,11 +141,18 @@ export default class Chronicle {
 
   // method to conditionally sanitize user configuration input
   sanitizeOptions() {
-    const { path } = this.options;
+    let { path } = this.options;
+
+    // use project root directory behind path
+    const __dirname = projectPath.dirname(fileURLToPath(import.meta.url));
+    path = projectPath.resolve(__dirname, path);
 
     // force path property to contain a trailing "/"
     if (path[path.length - 1] !== '/') {
-      this.options.path += '/';
+      path += '/';
     }
+
+    // update the actual options path with newly sanitized path
+    this.options.path = path;
   }
 }
