@@ -143,7 +143,7 @@ Chronicle will generate convenience methods for all keys provided, with the corr
   chronicle.custom() // cyan output
 ```
 
-These methods can then be called in your application with [logging parameters](https://github.com/abofs/chronicle#logging%20parameters).
+These methods can then be called in your application with [logging parameters](https://github.com/abofs/chronicle#logging-parameters).
 
 Color settings are handled by determining whether your input is a color name, or a hex value (prefixed with **#**). For example, passing `red` as a color setting, will utilize `chalk.red`, while passing `#ff0000` would use `chalk.hex('#ff0000')` instead. A [list of available colors](https://github.com/chalk/chalk#colors) can be found in chalks' documentation. 
 
@@ -221,7 +221,7 @@ const chronicle = new Chronicle({
 | `additionalLogs` | **Object** - Key value pair object containing log type to color setting for logs that will be merged with `systemLogs` |
 | `systemLogs` | **Object** - Key value pair object containing log type to color setting for main chronicle logs available in application |
 
-`additionalLogs` and `systemLogs` are explained with more detail in the [defining logs](https://github.com/abofs/chronicle#defining%20logs) and colors section.
+`additionalLogs` and `systemLogs` are explained with more detail in the [defining logs](https://github.com/abofs/chronicle#defining-logs) and colors section.
 
 ## Origin
 
