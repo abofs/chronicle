@@ -45,14 +45,6 @@ npm install @abofs/chronicle
 ## Usage
 
 ```js
-import chronicle from 'chronicle';
-
-console.log(chalk.blue('Hello world!'));
-```
-
-Chalk comes with an easy to use composable API where you just chain and nest the styles you want.
-
-```js
 import Chronicle from 'chronicle';
 
 const chronicle = new Chronicle();
