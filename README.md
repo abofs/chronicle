@@ -1,7 +1,7 @@
 <h1 align="center">
 	<br>
 	<br>
-	<img width="400" src="media/logo.svg" alt="Chronicle">
+	<img width="400" src="media/chronicle-logo.svg" alt="Chronicle">
 	<br>
 	<br>
 	<br>
@@ -10,9 +10,9 @@
 > Simplified logging for node applications
 
 [![npm dependents](https://badgen.net/npm/dependents/chalk)](https://www.npmjs.com/package/chalk?activeTab=dependents)
-[![Downloads](https://badgen.net/npm/dt/chronicle)](https://www.npmjs.com/package/chronicle)
+[![Downloads](https://badgen.net/npm/dt/@abofs/chronicle)](https://www.npmjs.com/package/@abofs/chronicle)
 
-![](media/screenshot.png)
+![](media/screenshot.jpg)
 
 <br>
 
@@ -97,7 +97,7 @@ const chronicle = new Chronicle({
 
 chronicle.info('Info: sample application has started');
 ```
-![](media/examples/custom-options.png)
+![](media/examples/custom-options.jpg)
 
 
 Add additional log types extending the default options of "info", "warn", "error" and "debug"
@@ -113,7 +113,7 @@ chronicle.setColorForType('query', chronicle.chalk().black.bgGreen);
 chronicle.question('What will a fully custom chalk color function look like?');
 chronicle.query('This is what a custom chalk color setting looks like');
 ```
-![](media/examples/additional-logs.png)
+![](media/examples/additional-logs.jpg)
 
 ## API
 
@@ -216,8 +216,8 @@ const chronicle = new Chronicle({
 | `logToFileByDefault` | **Boolean** Option to change default setting for `logToFile` parameter of logging functions. *Default: false* |
 | `logTimestamp` | **Boolean** Option to include timestamp in console logging. Timestamps are automatically included in file logs. *Default: false* |
 | `path` | **String** Path in which to store log files. This setting is relative to your project's root directory. *Default: 'logs/*' |
-| `prefix` | **String** Prefix string to prepend all log messages for all log types with the exception of *debug*. *Default: '' |
-| `suffix` | **String** Suffix string to tack on to all log messages for all log types with the exception of *debug*. *Default: '' |
+| `prefix` | **String** Prefix string to prepend all log messages for all log types with the exception of *debug*. *Default: ''* |
+| `suffix` | **String** Suffix string to tack on to all log messages for all log types with the exception of *debug*. *Default: ''* |
 | `additionalLogs` | **Object** Key value pair object containing log type to color setting for logs that will be merged with `systemLogs` |
 | `systemLogs` | **Object** Key value pair object containing log type to color setting for main chronicle logs available in application |
 
@@ -225,7 +225,7 @@ const chronicle = new Chronicle({
 
 ## Origin
 
-As an team of developers who are constantly working on side projects, We often litter our codebase with TODOs to refactor convenience utils such as **chronicle** into classes of their own, or projects of their own. This usually turns into internal tech debt that never gets addressed. Furthermore, We also often find ourselves going the "copy -> paste -> modify" route of previously written useful logic, which saves us time in new projects, but not as much as it would if all we had to do was run an `npm install` instead. 
+As an team of developers who are constantly working on side projects, We often litter our codebase with TODOs to refactor convenience utils such as **chronicle** into classes of their own, or projects of their own. This usually turns into internal tech debt that never gets addressed. Furthermore, We also often find ourselves going the *copy -> paste -> modify* route of previously written useful logic, which saves us time in new projects, but not as much as it would if all we had to do was run an `npm install` instead. 
 
 With that in mind, We are proud to release **chronicle** as an open source package, in hopes others will find this just as useful as we do in their own projects.  
 
