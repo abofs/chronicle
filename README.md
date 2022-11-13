@@ -51,7 +51,7 @@ const chronicle = new Chronicle();
 
 chronicle.info('Info: sample application has started');
 chronicle.warn('Warning: this is just a sample');
-chronicle.error('Error: no application logic detected', true); // logs to logs/error.lgo file
+chronicle.error('Error: no application logic detected', true); // logs to logs/error.log file
 ```
 
 Easily define your own logging mechanism and color-coding preference:
@@ -136,10 +136,12 @@ You can add to a new log/color setting by passing the `additionalLogs` option to
 
 Chronicle will generate convenience methods for all keys provided, with the corresponding color settings. The example above would create the following convenience methods, for logging:
 
-####chronicle.info()
-####chronicle.warn()
-####chronicle.error()
-####chronicle.custom()
+```js
+  chronicle.info()
+  chronicle.warn()
+  chronicle.error()
+  chronicle.custom()
+```
 
 These methods can then be called in your application with [logging parameters](https://github.com/abofs/chronicle#logging parameters).
 
@@ -149,7 +151,7 @@ Color settings are handled by determining whether your input is a color name, or
 
 ### advanced color setting
 
-Sometimes you may want to do more than just pick a basic color for your output. **chalk** offers a variety of different options, and can be configured via `setColorForType()`. **Chronicle** exposes the chalk instance via `chalk()` so that you don't have to import directly into your project. Here is an example of how you can use this method to fully customize your log color setting:
+Sometimes you may want to do more than just pick a basic color for your output. **chalk** offers a variety of different options, and can be configured via `setColorForType()`. **Chronicle** exposes the chalk instance via `chalk()` so that you don't have to import **chalk** directly into your project. Here is an example of how you can use this method to fully customize your log color setting:
 
 ```js
 const chronicle = new Chronicle();
