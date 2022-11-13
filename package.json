@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Logging util for npm projects",
   "type": "module",
-  "main": "index.js",
+  "main": "source/index.js",
   "scripts": {
     "test": "jest --coverage",
     "lint": "eslint . --fix"

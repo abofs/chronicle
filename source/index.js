@@ -13,8 +13,8 @@ const defaultOptions = {
   // log types with corresponding color settings
   additionalLogs: {},
   systemLogs: {
-    info: '#007cae', // indigo blue
-    warn: '#ae8f00', // bright orange
+    info: 'cyan',
+    warn: 'yellow',
     error: 'red',
   },
 };
