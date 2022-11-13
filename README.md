@@ -1,7 +1,7 @@
 <h1 align="center">
 	<br>
 	<br>
-	<img width="400" src="media/chronicle-logo.svg" alt="Chronicle">
+	<img width="480" src="media/chronicle-logo.svg" alt="Chronicle">
 	<br>
 	<br>
 	<br>
