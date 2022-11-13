@@ -184,9 +184,9 @@ chronicle.error('error message', true, false); // content, logToFile, overwrite
 
 | Parameter | Description |
 | :---: | :--- |
-| `content` | **String** Content of log that will output on your console |
-| `logToFile` | **Boolean** Option to log content to file. *Default: false* |
-| `overwrite` | **Boolean** Option to overwrite log file, rather than append to it. This option is redundant if logToFile is false. *Default: false* (for all log types except debug) |
+| `content` | **String** - Content of log that will output on your console |
+| `logToFile` | **Boolean** *Default: false* - Option to log content to file. |
+| `overwrite` | **Boolean** *Default: false* - (except debug) - Option to overwrite log file, rather than append to it. This option is redundant if logToFile is false.  |
 
 **logToFile** will log to *<project-root>/logs* unless [configured differently](https://github.com/abofs/chronicle#configuration) during instantiation. 
 
@@ -212,13 +212,13 @@ const chronicle = new Chronicle({
 
 | Option | Description |
 | :---: | :--- |
-| `logToFileByDefault` | **Boolean** Option to change default setting for `logToFile` parameter of logging functions. *Default: false* |
-| `logTimestamp` | **Boolean** Option to include timestamp in console logging. Timestamps are automatically included in file logs. *Default: false* |
-| `path` | **String** Path in which to store log files. This setting is relative to your project's root directory. *Default: 'logs/*' |
-| `prefix` | **String** Prefix string to prepend all log messages for all log types with the exception of *debug*. *Default: ''* |
-| `suffix` | **String** Suffix string to tack on to all log messages for all log types with the exception of *debug*. *Default: ''* |
-| `additionalLogs` | **Object** Key value pair object containing log type to color setting for logs that will be merged with `systemLogs` |
-| `systemLogs` | **Object** Key value pair object containing log type to color setting for main chronicle logs available in application |
+| `logToFileByDefault` | **Boolean** *Default: false* - Option to change default setting for `logToFile` parameter of logging functions. |
+| `logTimestamp` | **Boolean** *Default: false* - Option to include timestamp in console logging. Timestamps are automatically included in file logs. |
+| `path` | **String** *Default: 'logs/*' - Path in which to store log files. This setting is relative to your project's root directory. |
+| `prefix` | **String** *Default: ''*  - Prefix string to prepend all log messages for all log types with the exception of *debug*. |
+| `suffix` | **String** *Default: ''* - Suffix string to tack on to all log messages for all log types with the exception of *debug*. |
+| `additionalLogs` | **Object** - Key value pair object containing log type to color setting for logs that will be merged with `systemLogs` |
+| `systemLogs` | **Object** - Key value pair object containing log type to color setting for main chronicle logs available in application |
 
 `additionalLogs` and `systemLogs` are explained with more detail in the [defining logs](https://github.com/abofs/chronicle#defining%20logs) and colors section.
 
