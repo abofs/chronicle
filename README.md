@@ -9,9 +9,6 @@
 
 > Simplified logging for node applications
 
-[![npm dependents](https://badgen.net/npm/dependents/chalk)](https://www.npmjs.com/package/chalk?activeTab=dependents)
-[![Downloads](https://badgen.net/npm/dt/@abofs/chronicle)](https://www.npmjs.com/package/@abofs/chronicle)
-
 ![](media/screenshot.jpg)
 
 <br>
@@ -146,10 +143,10 @@ You can add to a new log/color setting by passing the `additionalLogs` option to
 
 Chronicle will generate convenience methods for all keys provided, with the corresponding color settings. The example above would create the following convenience methods, for logging:
 
-**chronicle.info()**
-**chronicle.warn()**
-**chronicle.error()**
-**chronicle.custom()**
+####chronicle.info()
+####chronicle.warn()
+####chronicle.error()
+####chronicle.custom()
 
 These methods can then be called in your application with [logging parameters](https://github.com/abofs/chronicle#logging parameters).
 
