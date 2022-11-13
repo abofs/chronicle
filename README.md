@@ -157,7 +157,14 @@ Sometimes you may want to do more than just pick a basic color for your output. 
 const chronicle = new Chronicle();
 
 chronicle.setColorForType('info', chronicle.chalk().black.bgCyan);
-chronicle.info('This log now has a cyan background');
+chronicle.setColorForType('critical', chronicle.chalk().bold.red);
+chronicle.setColorForType('dialog', 'magentaBright');
+chronicle.setColorForType('notice', '#c0c0c0');
+
+chronicle.info('This pre-existing log now has a cyan background and black foreground');
+chronicle.critical('This new log is bold and red');
+chronicle.dialog('This new dialog is bright magenta');
+chronicle.notice('This new log is the hex "#c0c0c0" share of gray');
 ```
 
 `setColorForType()` can also be used as an alternative to populating the `additionalLogs` setting in the constructor, as if the setting doesn't already exist, it will then be created.
