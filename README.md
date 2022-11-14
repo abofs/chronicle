@@ -162,7 +162,7 @@ JSON.stringify(content, null, 2);
 ```
 
 We believe that when wanting to output complicated objects, or debug **typescript** applications, there are better methods than utilizing this chronicle package, but
-for anyone who's fully incorporated **Chronicle** into their project, this function offers an easy way to log your object's content to a log file.
+for anyone who's fully incorporated **Chronicle** into their project, this function offers some convenience.
 
 ### Logging Parameters
 
