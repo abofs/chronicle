@@ -220,7 +220,7 @@ chronicle.definetype('notice', '#c0c0c0', {
 | :---: | :--- | :--- |
 | `type` | **String** | Create or overwrites a logging function for the given type. |
 | `setting` | **String or Function** | Color setting or chalk function |
-| `options` | **Object** | Configure any setting only to the given type rather than globally. See [configuration](https://github.com/abofs/chronicle#configuration) for list of options |
+| `options` | **Object** | Configure any setting only to the given type rather than globally. See [configuration](#configuration) for list of options |
 
 
 ```js
