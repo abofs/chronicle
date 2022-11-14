@@ -155,11 +155,11 @@ Color settings are handled by determining whether your input is a color name, or
 chronicle.error('error message', true, false); // content, logToFile, overwrite
 ```
 
-| Parameter | Description |
-| :---: | :--- |
-| `content` | **String** - Content of log that will output on your console. |
-| `logToFile` | **Boolean** *Default: false* - Option to log content to file. |
-| `overwrite` | **Boolean** *Default: false* (*true* for debug method) - Option to overwrite log file, rather than append to it. This option is redundant if logToFile is false.  |
+| Parameter | Type | Default | Description |
+| :---: | :--- | :--- | :--- |
+| `content` | **String** | | Content of log that will output on your console. |
+| `logToFile` | **Boolean** | *false* | Option to log content to file. |
+| `overwrite` | **Boolean** | *false (true for debug method) | Option to overwrite log file, rather than append to it. This option is redundant if logToFile is false.  |
 
 **logToFile** will log to *<project-root>/logs* unless [configured differently](https://github.com/abofs/chronicle#configuration) during instantiation. <br>
 ### Configuration
@@ -196,7 +196,7 @@ const chronicle = new Chronicle({
 
 ### Advanced Configuration
 
-Sometimes you may want to do more than just pick a basic color for your output. **chalk** offers a variety of different options, and can be configured via `defineType()`. **Chronicle** exposes the chalk instance via `chalk()` so that you don't have to import **chalk** directly into your project. Here is an example of how you can use this method to fully customize your log color setting:
+You may want to do more than just pick a basic color for your output. **chalk** offers a variety of different options, and can be configured via `defineType()`. **Chronicle** exposes the chalk instance via `chalk()` so that you don't have to import **chalk** directly into your project. Here is an example of how you can use this method to fully customize your log color setting:
 
 ```js
 const chronicle = new Chronicle();
@@ -205,7 +205,7 @@ chronicle.defineType('critical', chronicle.chalk().bold.red);
 chronicle.critical('This is a critical error');
 ```
 
-Additionally, any option [configuration](https://github.com/abofs/chronicle#configuration) that can be done when in the constructor, can be applied exclusively to any given type by passing in a third parameter.
+Additionally, any [configuration](https://github.com/abofs/chronicle#configuration) that can be set during instantiation, can also be applied exclusively to any given type by passing in a third **options** parameter.
 
 ```js
 // params: type, setting, options
@@ -215,11 +215,12 @@ chronicle.definetype('notice', '#c0c0c0', {
 });
 ```
 
-| Parameter | Description |
-| :---: | :--- |
-| `type` | **String** - Create or overwrites a logging function for the given type. |
-| `setting` | **String or Function** - Color setting or chalk function |
-| `options` | **Object** - Configure any setting only to the given type rather than globally. See [configuration](https://github.com/abofs/chronicle#configuration) for list of options |
+### defineType() params
+| Parameter | Type | Description |
+| :---: | :--- | :--- |
+| `type` | **String** | Create or overwrites a logging function for the given type. |
+| `setting` | **String or Function** | Color setting or chalk function |
+| `options` | **Object** | Configure any setting only to the given type rather than globally. See [configuration](https://github.com/abofs/chronicle#configuration) for list of options |
 
 
 ```js
