@@ -19,7 +19,7 @@
 	<p>
 		<p>
 			<sup>
-			  If our other projects are useful to you, please consider becoming a <a href="https://github.com/sponsors/abofs">GitHub Sponsor</a>
+			  If our projects are useful to you, please consider becoming a <a href="https://github.com/sponsors/abofs">GitHub Sponsor</a>
 			</sup>
 		</p>
 	</p>
