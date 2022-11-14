@@ -184,13 +184,11 @@ chronicle.error('error message', true, false); // content, logToFile, overwrite
 
 | Parameter | Description |
 | :---: | :--- |
-| `content` | **String** - Content of log that will output on your console |
+| `content` | **String** - Content of log that will output on your console. |
 | `logToFile` | **Boolean** *Default: false* - Option to log content to file. |
-| `overwrite` | **Boolean** *Default: false* (except debug) - Option to overwrite log file, rather than append to it. This option is redundant if logToFile is false.  |
+| `overwrite` | **Boolean** *Default: false* (*true* for debug method) - Option to overwrite log file, rather than append to it. This option is redundant if logToFile is false.  |
 
 **logToFile** will log to *<project-root>/logs* unless [configured differently](https://github.com/abofs/chronicle#configuration) during instantiation. <br>
-**overwrite** defaults to *true* for the `debug()` method, but can be overridden by the `logToFile` parameter.
-
 ### Configuration
 
 When instantiating **chronicle**, you can pass an object to customize your settings. Below is the default configuration:
@@ -211,23 +209,23 @@ const chronicle = new Chronicle({
 });
 ```
 
-| Option | Description |
-| :---: | :--- |
-| `logToFileByDefault` | **Boolean** *Default: false* - Option to change default setting for `logToFile` parameter of logging functions. |
-| `logTimestamp` | **Boolean** *Default: false* - Option to include timestamp in console logging. Timestamps are automatically included in file logs. |
-| `path` | **String** *Default: 'logs/*' - Path in which to store log files. This setting is relative to your project's root directory. |
-| `prefix` | **String** *Default: ''*  - Prefix string to prepend all log messages for all log types with the exception of *debug*. |
-| `suffix` | **String** *Default: ''* - Suffix string to tack on to all log messages for all log types with the exception of *debug*. |
-| `additionalLogs` | **Object** - Key value pair object containing log type to color setting for logs that will be merged with `systemLogs` |
-| `systemLogs` | **Object** - Key value pair object containing log type to color setting for main chronicle logs available in application |
+| Option | Type | Default | Description |
+| :---: | :---: | :---: | :--- |
+| `logToFileByDefault` | **Boolean** | *false* | Option to change default setting for `logToFile` parameter of logging functions. |
+| `logTimestamp` | | **Boolean** | *false* | Option to include timestamp in console logging. Timestamps are automatically included in file logs. |
+| `path` | **String** | *'logs/*'* | Path in which to store log files. This setting is relative to your project's root directory. |
+| `prefix` | **String** | *''* | Prefix string to prepend all log messages for all log types with the exception of *debug*. |
+| `suffix` | **String** | *''* | Suffix string to tack on to all log messages for all log types with the exception of *debug*. |
+| `additionalLogs` | **Object** | | Key value pair object containing log type to color setting for logs that will be merged with `systemLogs` |
+| `systemLogs` | **Object** | | Key value pair object containing log type to color setting for main chronicle logs available in application |
 
 `additionalLogs` and `systemLogs` are explained with more detail in the [defining logs](https://github.com/abofs/chronicle#defining-logs) and colors section.
 
 ## Origin
 
-As an team of developers who are constantly working on side projects, We often litter our codebase with TODOs to refactor convenience utils such as **chronicle** into classes of their own, or projects of their own. This usually turns into internal tech debt that never gets addressed. Furthermore, We also often find ourselves going the *copy -> paste -> modify* route of previously written useful logic, which saves us time in new projects, but not as much as it would if all we had to do was run an `npm install` instead. 
+As a team of developers who are constantly working on side projects, we often litter our codebase with TODOs to refactor convenience utils such as **chronicle** into classes of their own, or projects of their own. This usually turns into internal tech debt that never gets addressed. Furthermore, we also often find ourselves going the *copy -> paste -> modify* route of previously written useful logic, which saves us time in new projects, but not as much as it would if all we had to do was run an `npm install` instead. 
 
-With that in mind, We are proud to release **chronicle** as an open source package, in hopes others will find this just as useful as we do in their own projects.  
+With that in mind, we are proud to release **chronicle** as an open source package, in hopes others will find this just as useful as we do in their own projects.  
 
 ## Maintainers
 
