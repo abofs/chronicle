@@ -143,7 +143,7 @@ Chronicle will generate convenience methods for all keys provided, with the corr
   chronicle.custom() // cyan output
 ```
 
-These methods can then be called in your application with [logging parameters](https://github.com/abofs/chronicle#logging-parameters).
+These methods can then be called in your application with [logging parameters](#logging-parameters).
 
 Color settings are handled by determining whether your input is a color name, or a hex value (prefixed with **#**). For example, passing `red` as a color setting, will utilize `chalk.red`, while passing `#ff0000` would use `chalk.hex('#ff0000')` instead. A [list of available colors](https://github.com/chalk/chalk#colors) can be found in chalks' documentation. 
 
@@ -161,7 +161,7 @@ chronicle.error('error message', true, false); // content, logToFile, overwrite
 | `logToFile` | **Boolean** | *false* | Option to log content to file. |
 | `overwrite` | **Boolean** | *false <br> (true on debug())* | Option to overwrite log file, rather than append to it. This option is redundant if logToFile is false.  |
 
-**logToFile** will log to *<project-root>/logs* unless [configured differently](https://github.com/abofs/chronicle#configuration) during instantiation. <br>
+**logToFile** will log to *<project-root>/logs* unless [configured](#configuration) differently during instantiation. <br>
 ### Configuration
 
 When instantiating **chronicle**, you can pass an object to customize your settings. Below is the default configuration:
@@ -192,7 +192,7 @@ const chronicle = new Chronicle({
 | `additionalLogs` | **Object** | | Key value pair object containing log type to color setting for logs that will be merged with `systemLogs` |
 | `systemLogs` | **Object** | | Key value pair object containing log type to color setting for main chronicle logs available in application |
 
-`additionalLogs` and `systemLogs` are explained with more detail in the [defining logs](https://github.com/abofs/chronicle#defining-logs) and colors section.
+`additionalLogs` and `systemLogs` are explained with more detail in the [defining logs and colors](#defining-logs) section.
 
 ### Advanced Configuration
 
@@ -205,7 +205,7 @@ chronicle.defineType('critical', chronicle.chalk().bold.red);
 chronicle.critical('This is a critical error');
 ```
 
-Additionally, any [configuration](https://github.com/abofs/chronicle#configuration) that can be set during instantiation, can also be applied exclusively to any given type by passing in a third **options** parameter.
+Additionally, any [configuration](#configuration) that can be set during instantiation, can also be applied exclusively to any given type by passing in a third **options** parameter.
 
 ```js
 // params: type, setting, options
