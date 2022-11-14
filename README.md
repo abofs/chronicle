@@ -107,7 +107,7 @@ chronicle.query('This is what a custom chalk color setting looks like');
 
 ## API
 
-### defining logs and colors
+### Defining Logs & Colors
 
 By default, chronicle is instantiated with the following options:
 
@@ -149,7 +149,7 @@ Color settings are handled by determining whether your input is a color name, or
 
 **IMPORTANT**: Please note that although chronicle can be configured to any color through chalk, your output is subject to your terminal's color limitations.
 
-### advanced color setting
+### Advanced Color Setting
 
 Sometimes you may want to do more than just pick a basic color for your output. **chalk** offers a variety of different options, and can be configured via `setColorForType()`. **Chronicle** exposes the chalk instance via `chalk()` so that you don't have to import **chalk** directly into your project. Here is an example of how you can use this method to fully customize your log color setting:
 
@@ -176,7 +176,7 @@ chronicle.setColorForType('critical', chronicle.chalk().bold.red);
 chronicle.critical('This is a critical error');
 ```
 
-### logging parameters
+### Logging Parameters
 
 ```js
 chronicle.error('error message', true, false); // content, logToFile, overwrite
@@ -191,7 +191,7 @@ chronicle.error('error message', true, false); // content, logToFile, overwrite
 **logToFile** will log to *<project-root>/logs* unless [configured differently](https://github.com/abofs/chronicle#configuration) during instantiation. <br>
 **overwrite** defaults to *true* for the `debug()` method, but can be overridden by the `logToFile` parameter.
 
-### configuration
+### Configuration
 
 When instantiating **chronicle**, you can pass an object to customize your settings. Below is the default configuration:
 
