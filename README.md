@@ -27,7 +27,7 @@
 
 ---
 
-**Chronicle** is built on top of all the great work done by "Sindre Sorhus" and other collaborators to the [chalk](https://www.npmjs.com/package/chalk) project.
+**Chronicle** is built on top of all the great work done by "Sindre Sorhus" and other collaborators of the [chalk](https://www.npmjs.com/package/chalk) project.
 This project is not directly associated with chalk other than chalk being a core dependency of **Chronicle**.
 
 ## Highlights
