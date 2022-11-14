@@ -143,11 +143,14 @@ export default class Chronicle {
   sanitizeOptions() {
     let { path } = this.options;
 
-    // use project root directory behind path
-    path = projectPath.resolve('./', path);
-
     const moduleDir = projectPath.dirname(fileURLToPath(import.meta.url));
-    console.log({ moduleDir }); // '/Users/stone/Repos/abofs/chronicle/source'
+    const delim = moduleDir.includes('node_modules') ? 'node_modules' : 'source';
+    const splitDir = moduleDir.split(delim);
+
+    if (splitDir.length < 2) throw ('Failed to locate your project\'s root directory');
+
+    // use project root directory behind path
+    path = projectPath.resolve(splitDir[0], path);
     
     // force path property to contain a trailing "/"
     if (path[path.length - 1] !== '/') {
