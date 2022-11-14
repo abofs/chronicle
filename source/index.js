@@ -128,7 +128,7 @@ export default class Chronicle {
 
     await fsp.access(path).catch(() => {
       fsp.mkdir(path).catch(() => {
-        errorMethod(`Failed to create configured directory for log files: ${path} (${tempNotice})`);
+        errorMethod(`Failed to create configured directory: ${path} (${tempNotice})`);
       });
     });
 
