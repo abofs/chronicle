@@ -1,7 +1,7 @@
 <h1 align="center">
 	<br>
 	<br>
-	<img width="560" src="media/chronicle-logo.svg" alt="Chronicle">
+	<img width="560" src="https://github.com/abofs/chronicle/raw/master/media/chronicle-logo.svg" alt="Chronicle">
 	<br>
 	<br>
 	<br>
@@ -9,7 +9,7 @@
 
 > Simplified logging for node applications
 
-![](media/screenshot.jpg)
+![](https://github.com/abofs/chronicle/raw/master/media/screenshot.jpg)
 
 <br>
 
@@ -39,7 +39,7 @@ This project is not directly associated with chalk other than chalk being a core
 ## Install
 
 ```sh
-npm install @abofs/chronicle
+npm install node-chronicle
 ```
 
 ## Usage
@@ -87,7 +87,7 @@ const chronicle = new Chronicle({
 
 chronicle.info('Info: sample application has started');
 ```
-![](media/examples/custom-options.jpg)
+![](https://github.com/abofs/chronicle/raw/master/media/examples/custom-options.jpg)
 
 
 Add additional log types extending the default options of "info", "warn", "error" and "debug"
@@ -103,7 +103,7 @@ chronicle.defineType('query', chronicle.chalk().black.bgGreen);
 chronicle.question('What will a fully custom chalk color function look like?');
 chronicle.query('This is what a custom chalk color setting looks like');
 ```
-![](media/examples/additional-logs.jpg)
+![](https://github.com/abofs/chronicle/raw/master/media/examples/additional-logs.jpg)
 
 ## API
 

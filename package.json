@@ -1,5 +1,5 @@
 {
-  "name": "@abofs/chronicle",
+  "name": "node-chronicle",
   "version": "0.0.1",
   "description": "Flexible logging utility for node applications.",
   "type": "module",
