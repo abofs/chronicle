@@ -20,7 +20,7 @@ async function targetExists(target) {
 }
 
 /*
- * NOTE: util function to allow time for files to be creted. May be worth making log functions return a
+ * NOTE: util function to allow time for files to be created. May be worth making log functions return a
  * promise that resolves only after log file operations have completed. This would remove the need to use
  * this timeout function in our tests, speeding up our tests and making them less flaky.
  */
