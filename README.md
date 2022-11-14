@@ -171,7 +171,7 @@ chronicle.error('error message', true, false); // content, logToFile, overwrite
 ```
 
 | Parameter | Type | Default | Description |
-| :---: | :--- | :--- | :--- |
+| :---: | :---: | :---: | :--- |
 | `content` | **String** | | Content of log that will output on your console. |
 | `logToFile` | **Boolean** | *false* | Option to log content to file. |
 | `overwrite` | **Boolean** | *false <br> (true on debug())* | Option to overwrite log file, rather than append to it. This option is redundant if logToFile is false.  |
@@ -232,7 +232,7 @@ chronicle.definetype('notice', '#c0c0c0', {
 
 ### defineType() params
 | Parameter | Type | Description |
-| :---: | :--- | :--- |
+| :---: | :---: | :--- |
 | `type` | **String** | Create or overwrites a logging function for the given type. |
 | `setting` | **String or Function** | Color setting or chalk function |
 | `options` | **Object** | Configure any setting only to the given type rather than globally. See [configuration](#configuration) for list of options |
