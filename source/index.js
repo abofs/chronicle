@@ -1,4 +1,5 @@
 import { promises as fsp } from 'fs';
+import { fileURLToPath } from 'url';
 import projectPath from 'path';
 import Color from './color.js';
 
@@ -145,6 +146,9 @@ export default class Chronicle {
     // use project root directory behind path
     path = projectPath.resolve('./', path);
 
+    const moduleDir = projectPath.dirname(fileURLToPath(import.meta.url));
+    console.log({ moduleDir }); // '/Users/stone/Repos/abofs/chronicle/source'
+    
     // force path property to contain a trailing "/"
     if (path[path.length - 1] !== '/') {
       path += '/';
@@ -152,6 +156,5 @@ export default class Chronicle {
 
     // update the actual options path with newly sanitized path
     this.options.path = path;
-    console.log("options set as", path);
   }
 }
