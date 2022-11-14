@@ -149,6 +149,51 @@ Color settings are handled by determining whether your input is a color name, or
 
 **IMPORTANT**: Please note that although chronicle can be configured to any color through chalk, your output is subject to your terminal's color limitations.
 
+### Logging Parameters
+
+```js
+chronicle.error('error message', true, false); // content, logToFile, overwrite
+```
+
+| Parameter | Description |
+| :---: | :--- |
+| `content` | **String** - Content of log that will output on your console. |
+| `logToFile` | **Boolean** *Default: false* - Option to log content to file. |
+| `overwrite` | **Boolean** *Default: false* (*true* for debug method) - Option to overwrite log file, rather than append to it. This option is redundant if logToFile is false.  |
+
+**logToFile** will log to *<project-root>/logs* unless [configured differently](https://github.com/abofs/chronicle#configuration) during instantiation. <br>
+### Configuration
+
+When instantiating **chronicle**, you can pass an object to customize your settings. Below is the default configuration:
+
+```js
+const chronicle = new Chronicle({
+  logToFileByDefault: false,
+  logTimestamp: false,
+  path: 'logs/',
+  prefix: '',
+  suffix: '',
+  additionalLogs: {},
+  systemLogs: {
+    info: 'cyan',
+    warn: 'yellow',
+    error: 'red',
+  }
+});
+```
+
+| Option | Type | Default | Description |
+| :---: | :---: | :---: | :--- |
+| `logToFileByDefault` | **Boolean** | *false* | Option to change default setting for `logToFile` parameter of logging functions. |
+| `logTimestamp` | **Boolean** | *false* | Option to include timestamp in console logging. Timestamps are automatically included in file logs. |
+| `path` | **String** | *'logs/*'* | Path in which to store log files. This setting is relative to your project's root directory. |
+| `prefix` | **String** | *''* | Prefix string to prepend all log messages for all log types with the exception of *debug*. |
+| `suffix` | **String** | *''* | Suffix string to tack on to all log messages for all log types with the exception of *debug*. |
+| `additionalLogs` | **Object** | | Key value pair object containing log type to color setting for logs that will be merged with `systemLogs` |
+| `systemLogs` | **Object** | | Key value pair object containing log type to color setting for main chronicle logs available in application |
+
+`additionalLogs` and `systemLogs` are explained with more detail in the [defining logs](https://github.com/abofs/chronicle#defining-logs) and colors section.
+
 ### Advanced Configuration
 
 Sometimes you may want to do more than just pick a basic color for your output. **chalk** offers a variety of different options, and can be configured via `defineType()`. **Chronicle** exposes the chalk instance via `chalk()` so that you don't have to import **chalk** directly into your project. Here is an example of how you can use this method to fully customize your log color setting:
@@ -195,51 +240,6 @@ chronicle.notice('This new log is the hex "#c0c0c0" share of gray');
 ```
 
 `defineType()` can also be used as an alternative to populating the `additionalLogs` setting in the constructor, as if the setting doesn't already exist, it will then be created.
-
-### Logging Parameters
-
-```js
-chronicle.error('error message', true, false); // content, logToFile, overwrite
-```
-
-| Parameter | Description |
-| :---: | :--- |
-| `content` | **String** - Content of log that will output on your console. |
-| `logToFile` | **Boolean** *Default: false* - Option to log content to file. |
-| `overwrite` | **Boolean** *Default: false* (*true* for debug method) - Option to overwrite log file, rather than append to it. This option is redundant if logToFile is false.  |
-
-**logToFile** will log to *<project-root>/logs* unless [configured differently](https://github.com/abofs/chronicle#configuration) during instantiation. <br>
-### Configuration
-
-When instantiating **chronicle**, you can pass an object to customize your settings. Below is the default configuration:
-
-```js
-const chronicle = new Chronicle({
-  logToFileByDefault: false,
-  logTimestamp: false,
-  path: 'logs/',
-  prefix: '',
-  suffix: '',
-  additionalLogs: {},
-  systemLogs: {
-    info: 'cyan',
-    warn: 'yellow',
-    error: 'red',
-  }
-});
-```
-
-| Option | Type | Default | Description |
-| :---: | :---: | :---: | :--- |
-| `logToFileByDefault` | **Boolean** | *false* | Option to change default setting for `logToFile` parameter of logging functions. |
-| `logTimestamp` | **Boolean** | *false* | Option to include timestamp in console logging. Timestamps are automatically included in file logs. |
-| `path` | **String** | *'logs/*'* | Path in which to store log files. This setting is relative to your project's root directory. |
-| `prefix` | **String** | *''* | Prefix string to prepend all log messages for all log types with the exception of *debug*. |
-| `suffix` | **String** | *''* | Suffix string to tack on to all log messages for all log types with the exception of *debug*. |
-| `additionalLogs` | **Object** | | Key value pair object containing log type to color setting for logs that will be merged with `systemLogs` |
-| `systemLogs` | **Object** | | Key value pair object containing log type to color setting for main chronicle logs available in application |
-
-`additionalLogs` and `systemLogs` are explained with more detail in the [defining logs](https://github.com/abofs/chronicle#defining-logs) and colors section.
 
 ## Origin
 
