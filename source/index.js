@@ -6,7 +6,7 @@ import Color from './color.js';
 const defaultOptions = {
   logToFileByDefault: false, // default setting (overridable by logToFile param)
   logTimestamp: false, // option to include timestamp in console logs
-  path: 'logs/', // default log directory (relative to main project file that runs your app)
+  path: 'logs/', // default log directory (relative to main project root directory)
   prefix: '',
   suffix: '',
 
