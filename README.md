@@ -149,9 +149,18 @@ Color settings are handled by determining whether your input is a color name, or
 
 **IMPORTANT**: Please note that although chronicle can be configured to any color through chalk, your output is subject to your terminal's color limitations.
 
-### Advanced Color Setting
+### Advanced Configuration
 
 Sometimes you may want to do more than just pick a basic color for your output. **chalk** offers a variety of different options, and can be configured via `defineType()`. **Chronicle** exposes the chalk instance via `chalk()` so that you don't have to import **chalk** directly into your project. Here is an example of how you can use this method to fully customize your log color setting:
+
+```js
+const chronicle = new Chronicle();
+
+chronicle.defineType('critical', chronicle.chalk().bold.red);
+chronicle.critical('This is a critical error');
+```
+
+Additionally, any option [configuration](https://github.com/abofs/chronicle#configuration) that can be done when in the constructor, can be applied exclusively to any given type by passing in a third parameter.
 
 ```js
 // params: type, setting, options
@@ -167,7 +176,6 @@ chronicle.definetype('notice', '#c0c0c0', {
 | `setting` | **String or Function** - Color setting or chalk function |
 | `options` | **Object** - Configure any setting only to the given type rather than globally. See [configuration](https://github.com/abofs/chronicle#configuration) for list of options |
 
-**logToFile** will log to *<project-root>/logs* unless [configured differently](https://github.com/abofs/chronicle#configuration) during instantiation. <br>
 
 ```js
 const chronicle = new Chronicle();
@@ -187,13 +195,6 @@ chronicle.notice('This new log is the hex "#c0c0c0" share of gray');
 ```
 
 `defineType()` can also be used as an alternative to populating the `additionalLogs` setting in the constructor, as if the setting doesn't already exist, it will then be created.
-
-```js
-const chronicle = new Chronicle();
-
-chronicle.defineType('critical', chronicle.chalk().bold.red);
-chronicle.critical('This is a critical error');
-```
 
 ### Logging Parameters
 
