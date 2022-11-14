@@ -1,0 +1,40 @@
+{
+  "name": "chronicle",
+  "version": "0.0.1",
+  "description": "Flexible logging utility for node applications.",
+  "type": "module",
+  "main": "source/index.js",
+  "scripts": {
+    "test": "qunit",
+    "lint": "eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abofs/logger.git"
+  },
+  "keywords": [
+    "log",
+    "logging",
+    "debug",
+    "color-coding",
+    "chalk",
+    "clean-output"
+  ],
+  "author": "Stone Costa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abofs/logger/issues"
+  },
+  "homepage": "https://github.com/abofs/logger#readme",
+  "dependencies": {
+    "chalk": "^5.1.2",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.27.0",
+    "eslint-plugin-node": "^11.1.0",
+    "qunit": "^2.19.3"
+  }
+}
