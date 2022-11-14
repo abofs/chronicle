@@ -61,10 +61,10 @@ export default class Chronicle {
   // validates params and sets configuration-based defaults for logging
   logAction(type, content, logToFile, overwrite) {
     // set logToFile default based on class options when not set
-    if (!arguments[2]) logToFile = this.options.logToFileByDefault;
+    if (arguments[2] === undefined) logToFile = this.options.logToFileByDefault;
 
     // treat overwrite default as true for log type "debug"
-    if (type === 'debug' && !arguments[3]) overwrite = true;
+    if (type === 'debug' && arguments[3] === undefined) overwrite = true;
 
     return this.log(content, type, logToFile, overwrite);
   }
