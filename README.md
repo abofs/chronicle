@@ -223,7 +223,7 @@ const chronicle = new Chronicle({
 
 ## Origin
 
-As an team of developers who are constantly working on side projects, we often litter our codebase with TODOs to refactor convenience utils such as **chronicle** into classes of their own, or projects of their own. This usually turns into internal tech debt that never gets addressed. Furthermore, we also often find ourselves going the *copy -> paste -> modify* route of previously written useful logic, which saves us time in new projects, but not as much as it would if all we had to do was run an `npm install` instead. 
+As a team of developers who are constantly working on side projects, we often litter our codebase with TODOs to refactor convenience utils such as **chronicle** into classes of their own, or projects of their own. This usually turns into internal tech debt that never gets addressed. Furthermore, we also often find ourselves going the *copy -> paste -> modify* route of previously written useful logic, which saves us time in new projects, but not as much as it would if all we had to do was run an `npm install` instead. 
 
 With that in mind, we are proud to release **chronicle** as an open source package, in hopes others will find this just as useful as we do in their own projects.  
 
