@@ -148,6 +148,22 @@ Chronicle will generate convenience methods for all keys provided, with the corr
 These methods can then be called in your application with [logging parameters](#logging-parameters).
 
 Color settings are handled by determining whether your input is a color name, or a hex value (prefixed with **#**). For example, passing `red` as a color setting, will utilize `chalk.red`, while passing `#ff0000` would use `chalk.hex('#ff0000')` instead. A [list of available colors](https://github.com/chalk/chalk#colors) can be found in chalks' documentation.
+
+### The Debug Method
+
+**Chronicle** allows for the `chronicle.debug()` method to be overridden by a color setting, however by default, we do not define a color for debug, and debug is handled differently. For console logging, all **debug** does, is output the following:
+
+```js
+// For logging to console:
+console.dir(content);
+
+// For writing to file:
+JSON.stringify(content, null, 2);
+```
+
+We believe that when wanting to output complicated objects, or debug **typescript** applications, there are better methods than utilizing this chronicle package, but
+for anyone who's fully incorporated **Chronicle** into their project, this function offers an easy way to log your object's content to a log file.
+
 ### Logging Parameters
 
 ```js
