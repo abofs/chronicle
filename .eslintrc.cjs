@@ -8,7 +8,7 @@ module.exports = {
     'eslint:recommended',
   ],
   globals: {
-    Parallel: 'readonly',
+    Promise: 'readonly',
     require: 'readonly',
     module: 'readonly',
   },

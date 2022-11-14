@@ -98,7 +98,7 @@ import Chronicle from '../source/index.js';
 const chronicle = new Chronicle({ additionalLogs: { question: 'green' } });
 
 // create additional log with advanced direct chalk configuration
-chronicle.setColorForType('query', chronicle.chalk().black.bgGreen);
+chronicle.defineType('query', chronicle.chalk().black.bgGreen);
 
 chronicle.question('What will a fully custom chalk color function look like?');
 chronicle.query('This is what a custom chalk color setting looks like');
@@ -151,15 +151,34 @@ Color settings are handled by determining whether your input is a color name, or
 
 ### Advanced Color Setting
 
-Sometimes you may want to do more than just pick a basic color for your output. **chalk** offers a variety of different options, and can be configured via `setColorForType()`. **Chronicle** exposes the chalk instance via `chalk()` so that you don't have to import **chalk** directly into your project. Here is an example of how you can use this method to fully customize your log color setting:
+Sometimes you may want to do more than just pick a basic color for your output. **chalk** offers a variety of different options, and can be configured via `defineType()`. **Chronicle** exposes the chalk instance via `chalk()` so that you don't have to import **chalk** directly into your project. Here is an example of how you can use this method to fully customize your log color setting:
+
+```js
+// params: type, setting, options
+chronicle.definetype('notice', '#c0c0c0', {
+  prefix: '--------------------------------------------------------------- \n',
+  suffix: '\n=============================================================== \n'
+});
+```
+
+| Parameter | Description |
+| :---: | :--- |
+| `type` | **String** - Create or overwrites a logging function for the given type. |
+| `setting` | **String or Function** - Color setting or chalk function |
+| `options` | **Object** - Configure any setting only to the given type rather than globally. See [configuration](https://github.com/abofs/chronicle#configuration) for list of options |
+
+**logToFile** will log to *<project-root>/logs* unless [configured differently](https://github.com/abofs/chronicle#configuration) during instantiation. <br>
 
 ```js
 const chronicle = new Chronicle();
 
-chronicle.setColorForType('info', chronicle.chalk().black.bgCyan);
-chronicle.setColorForType('critical', chronicle.chalk().bold.red);
-chronicle.setColorForType('dialog', 'magentaBright');
-chronicle.setColorForType('notice', '#c0c0c0');
+chronicle.defineType('info', chronicle.chalk().black.bgCyan);
+chronicle.defineType('critical', chronicle.chalk().bold.red);
+chronicle.defineType('dialog', 'magentaBright');
+chronicle.definetype('notice', '#c0c0c0', {
+  prefix: '--------------------------------------------------------------- \n',
+  suffix: '\n=============================================================== \n'
+});
 
 chronicle.info('This pre-existing log now has a cyan background and black foreground');
 chronicle.critical('This new log is bold and red');
@@ -167,12 +186,12 @@ chronicle.dialog('This new dialog is bright magenta');
 chronicle.notice('This new log is the hex "#c0c0c0" share of gray');
 ```
 
-`setColorForType()` can also be used as an alternative to populating the `additionalLogs` setting in the constructor, as if the setting doesn't already exist, it will then be created.
+`defineType()` can also be used as an alternative to populating the `additionalLogs` setting in the constructor, as if the setting doesn't already exist, it will then be created.
 
 ```js
 const chronicle = new Chronicle();
 
-chronicle.setColorForType('critical', chronicle.chalk().bold.red);
+chronicle.defineType('critical', chronicle.chalk().bold.red);
 chronicle.critical('This is a critical error');
 ```
 

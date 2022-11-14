@@ -19,6 +19,9 @@ const defaultOptions = {
   },
 };
 
+// used to sanitize defineType() options input
+const optionKeys = Object.keys(defaultOptions);
+
 export default class Chronicle {
   constructor(options = defaultOptions) {
     options = {
@@ -26,7 +29,7 @@ export default class Chronicle {
       ...options,
     };
     this.options = options;
-    this.sanitizeOptions();
+    this.options.path = this.sanitizePath(this.options.path);
 
     const { additionalLogs, systemLogs } = options;
     const logs = {
@@ -35,16 +38,29 @@ export default class Chronicle {
     };
 
     this.color = new Color();
+    this.typeOptions = [];
 
     // create direct convenience methods for logging
     for (const type of Object.keys(logs)) {
-      this.setColorForType(type, logs[type]);
+      this.defineType(type, logs[type]);
     }
   }
 
-  // records color setting for log type, and crates convenience method ie: chronicle.info()
-  setColorForType(type, setting) {
+  // records setting and options for log type, and crates convenience method ie: chronicle.info()
+  defineType(type, setting, options=null) {
     this.color.setLogColor(type, setting);
+
+    if (options && typeof options === 'object') {
+      // sanitize user input (only store allowed types)
+      for (let option of Object.keys(options)) {
+        if (!optionKeys.includes(option)) delete options[option];
+        if (option === 'path') options[option] = this.sanitizePath(options[option]);
+      }
+
+      if (Object.keys(options).length) {
+        this.typeOptions[type] = options;
+      }
+    }
 
     // halt if convenience method already exists
     if (this[type]) return;
@@ -61,7 +77,7 @@ export default class Chronicle {
   // validates params and sets configuration-based defaults for logging
   logAction(type, content, logToFile, overwrite) {
     // set logToFile default based on class options when not set
-    if (arguments[2] === undefined) logToFile = this.options.logToFileByDefault;
+    if (arguments[2] === undefined) logToFile = this.getOptionForType(type, 'logToFileByDefault');
 
     // treat overwrite default as true for log type "debug"
     if (type === 'debug' && arguments[3] === undefined) overwrite = true;
@@ -69,17 +85,26 @@ export default class Chronicle {
     return this.log(content, type, logToFile, overwrite);
   }
 
-  // exposes chalk for custom color options via setColorForType
+  // retrieves option setting for given type, default to global
+  getOptionForType(type, option) {
+    const options = this.typeOptions[type];
+    if (!options || !options[option]) return this.options[option];
+
+    return options[option];
+  }
+
+  // exposes chalk for custom color options via defineType
   chalk() {
     return this.color.getChalkInstance();
   }
 
   // logs to console, and conditionally to file
   async log(content, type, logToFile, overwrite) {
-    const { logTimestamp } = this.options;
+    const logTimestamp = this.getOptionForType(type, 'logTimestamp');
     const timestamp = `[${new Date().toLocaleString('en-US')}]`;
     const chalkColorFunction = this.color.getLogColor(type);
-    let { prefix, suffix } = this.options;
+    let prefix = this.getOptionForType(type, 'prefix');
+    let suffix = this.getOptionForType(type, 'suffix');
     if (logTimestamp) prefix += `${timestamp} `;
     if (prefix) prefix = chalkColorFunction(prefix);
     if (suffix) suffix = chalkColorFunction(suffix);
@@ -102,8 +127,9 @@ export default class Chronicle {
   }
 
   async writeToFile(type, content, overwrite) {
-    const targetLog = `${this.options.path}${type}.log`;
-    await this.validateFileAndDirectory(targetLog);
+    const path = this.getOptionForType(type, 'path');
+    const targetLog = `${path}${type}.log`;
+    await this.validateFileAndDirectory(path, targetLog);
 
     const fileAction = overwrite ? fsp.writeFile : fsp.appendFile;
 
@@ -111,8 +137,7 @@ export default class Chronicle {
   }
 
   // attempts to create file and/or directory if they don't already exist
-  async validateFileAndDirectory(targetLog) {
-    const { path } = this.options;
+  async validateFileAndDirectory(path, targetLog) {
     const errorMethod = this.error ? this.error : console.error; // prefer native method unless removed by user
 
     /*
@@ -140,9 +165,7 @@ export default class Chronicle {
   }
 
   // method to conditionally sanitize user configuration input
-  sanitizeOptions() {
-    let { path } = this.options;
-
+  sanitizePath(path) {
     const moduleDir = projectPath.dirname(fileURLToPath(import.meta.url));
     const delim = moduleDir.includes('node_modules') ? 'node_modules' : 'source';
     const splitDir = moduleDir.split(delim);
@@ -157,7 +180,6 @@ export default class Chronicle {
       path += '/';
     }
 
-    // update the actual options path with newly sanitized path
-    this.options.path = path;
+    return path;
   }
 }
