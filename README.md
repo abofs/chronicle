@@ -157,9 +157,9 @@ chronicle.error('error message', true, false); // content, logToFile, overwrite
 
 | Parameter | Type | Default | Description |
 | :---: | :--- | :--- | :--- |
-| `content` | **String** | *required* | Content of log that will output on your console. |
+| `content` | **String** | | Content of log that will output on your console. |
 | `logToFile` | **Boolean** | *false* | Option to log content to file. |
-| `overwrite` | **Boolean** | *false <br> (true for debug method)* | Option to overwrite log file, rather than append to it. This option is redundant if logToFile is false.  |
+| `overwrite` | **Boolean** | *false <br> (true on debug())* | Option to overwrite log file, rather than append to it. This option is redundant if logToFile is false.  |
 
 **logToFile** will log to *<project-root>/logs* unless [configured differently](https://github.com/abofs/chronicle#configuration) during instantiation. <br>
 ### Configuration
