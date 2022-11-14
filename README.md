@@ -30,6 +30,8 @@
 **Chronicle** is built on top of all the great work done by "Sindre Sorhus" and other collaborators of the [chalk](https://www.npmjs.com/package/chalk) project.
 This project is not directly associated with chalk other than chalk being a core dependency of **Chronicle**.
 
+**IMPORTANT**: Please note that although chronicle can be configured to any color through chalk, your output is subject to your terminal's color limitations.
+
 ## Highlights
 
 - Fully configurable
@@ -145,10 +147,7 @@ Chronicle will generate convenience methods for all keys provided, with the corr
 
 These methods can then be called in your application with [logging parameters](#logging-parameters).
 
-Color settings are handled by determining whether your input is a color name, or a hex value (prefixed with **#**). For example, passing `red` as a color setting, will utilize `chalk.red`, while passing `#ff0000` would use `chalk.hex('#ff0000')` instead. A [list of available colors](https://github.com/chalk/chalk#colors) can be found in chalks' documentation. 
-
-**IMPORTANT**: Please note that although chronicle can be configured to any color through chalk, your output is subject to your terminal's color limitations.
-
+Color settings are handled by determining whether your input is a color name, or a hex value (prefixed with **#**). For example, passing `red` as a color setting, will utilize `chalk.red`, while passing `#ff0000` would use `chalk.hex('#ff0000')` instead. A [list of available colors](https://github.com/chalk/chalk#colors) can be found in chalks' documentation.
 ### Logging Parameters
 
 ```js
