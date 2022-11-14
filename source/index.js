@@ -1,5 +1,4 @@
 import { promises as fsp } from 'fs';
-import { fileURLToPath } from 'url';
 import projectPath from 'path';
 import Color from './color.js';
 
@@ -144,8 +143,7 @@ export default class Chronicle {
     let { path } = this.options;
 
     // use project root directory behind path
-    const __dirname = projectPath.dirname(fileURLToPath(import.meta.url));
-    path = projectPath.resolve(__dirname, path);
+    path = projectPath.resolve('./', path);
 
     // force path property to contain a trailing "/"
     if (path[path.length - 1] !== '/') {
@@ -154,5 +152,6 @@ export default class Chronicle {
 
     // update the actual options path with newly sanitized path
     this.options.path = path;
+    console.log("options set as", path);
   }
 }
