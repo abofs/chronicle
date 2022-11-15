@@ -1,6 +1,6 @@
 {
   "name": "node-chronicle",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "Simplified logging for node applications",
   "type": "module",
   "main": "source/index.js",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/abofs/logger.git"
+    "url": "git+https://github.com/abofs/chronicle.git"
   },
   "keywords": [
     "log",
@@ -28,9 +28,9 @@
   "author": "Stone Costa",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/abofs/logger/issues"
+    "url": "https://github.com/abofs/chronicle/issues"
   },
-  "homepage": "https://github.com/abofs/logger#readme",
+  "homepage": "https://github.com/abofs/chronicle#readme",
   "dependencies": {
     "chalk": "^5.1.2",
     "fs": "^0.0.1-security",
