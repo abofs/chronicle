@@ -32,7 +32,7 @@ function timeout(ms) {
 }
 
 module('[Integration] Chronicle Tests', () => {
-  test('Convenience methods for systemlogs are successfuly created', assert => {
+  test('Convenience methods for systemLogs are successfully created', assert => {
     const chronicle = new Chronicle({
       systemLogs: {
         a: 'white',
@@ -45,11 +45,11 @@ module('[Integration] Chronicle Tests', () => {
     assert.deepEqual(
       [typeof a, typeof b, typeof c, info, warn, error],
       ['function', 'function', 'function', undefined, undefined, undefined],
-      'systemLogs funtions were replaced by configuration',
+      'systemLogs functions were replaced by configuration',
     );
   });
 
-  test('Convenience methods for additionalLogs are successfuly created', assert => {
+  test('Convenience methods for additionalLogs are successfully created', assert => {
     const chronicle = new Chronicle({
       additionalLogs: {
         a: 'white',
@@ -97,8 +97,7 @@ module('[Integration] Chronicle Tests', () => {
     assert.ok(logDirExists, 'log directory exists');
     assert.ok(logFileExists, 'log file exists');
 
-    // clean up to prevent test polution
-    await removeDirectory(path, assert);
+    await removeDirectory(path, assert); // clean up to prevent test pollution
   });
 
   test('Log creation respects the configured logToFileByDefault setting as true', async assert => {
@@ -149,7 +148,7 @@ module('[Integration] Chronicle Tests', () => {
     assert.ok(logDirExists, 'log directory exists');
     assert.ok(logFileExists, 'log file exists');
 
-    await removeDirectory(path, assert); // cleanup directory
+    await removeDirectory(path, assert); // clean up directory
   });
 
   test('Log creation respects type specific options set via defineType', async assert => {
@@ -182,6 +181,6 @@ module('[Integration] Chronicle Tests', () => {
     assert.ok(barLogDirExists, 'defineType log directory exists');
     assert.ok(logFileExists, 'bar log file exists');
 
-    await removeDirectory(barPath, assert); // cleanup directory
+    await removeDirectory(barPath, assert); // clean up directory
   });
 });
