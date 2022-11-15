@@ -1,7 +1,7 @@
 <h1 align="center">
 	<br>
 	<br>
-	<img width="560" src="media/chronicle-logo.svg" alt="Chronicle">
+	<img width="560" src="https://github.com/abofs/chronicle/raw/master/media/chronicle-logo.svg" alt="Chronicle">
 	<br>
 	<br>
 	<br>
@@ -9,7 +9,7 @@
 
 > Simplified logging for node applications
 
-![](media/screenshot.jpg)
+![](https://github.com/abofs/chronicle/raw/master/media/screenshot.jpg)
 
 <br>
 
@@ -30,6 +30,8 @@
 **Chronicle** is built on top of all the great work done by "Sindre Sorhus" and other collaborators of the [chalk](https://www.npmjs.com/package/chalk) project.
 This project is not directly associated with chalk other than chalk being a core dependency of **Chronicle**.
 
+**IMPORTANT**: Please note that although **Chronicle** can be configured to any color through chalk, your output is subject to your terminal's color limitations.
+
 ## Highlights
 
 - Fully configurable
@@ -39,7 +41,7 @@ This project is not directly associated with chalk other than chalk being a core
 ## Install
 
 ```sh
-npm install @abofs/chronicle
+npm install node-chronicle
 ```
 
 ## Usage
@@ -87,7 +89,7 @@ const chronicle = new Chronicle({
 
 chronicle.info('Info: sample application has started');
 ```
-![](media/examples/custom-options.jpg)
+![](https://github.com/abofs/chronicle/raw/master/media/examples/custom-options.jpg)
 
 
 Add additional log types extending the default options of "info", "warn", "error" and "debug"
@@ -97,19 +99,19 @@ import Chronicle from '../source/index.js';
 
 const chronicle = new Chronicle({ additionalLogs: { question: 'green' } });
 
-// create additional log with advanced direct chalk configuration
-chronicle.setColorForType('query', chronicle.chalk().black.bgGreen);
+// create additional log with direct chalk configuration
+chronicle.defineType('query', chronicle.chalk().black.bgGreen);
 
 chronicle.question('What will a fully custom chalk color function look like?');
 chronicle.query('This is what a custom chalk color setting looks like');
 ```
-![](media/examples/additional-logs.jpg)
+![](https://github.com/abofs/chronicle/raw/master/media/examples/additional-logs.jpg)
 
 ## API
 
 ### Defining Logs & Colors
 
-By default, chronicle is instantiated with the following options:
+By default, **Chronicle** is instantiated with the following options:
 
 ```js
   additionalLogs: {},
@@ -134,7 +136,7 @@ You can add to a new log/color setting by passing the `additionalLogs` option to
   }
 ```
 
-Chronicle will generate convenience methods for all keys provided, with the corresponding color settings. The example above would create the following convenience methods, for logging:
+**Chronicle** will generate convenience methods for all keys provided, with the corresponding color settings. The example above would create the following convenience methods, for logging:
 
 ```js
   chronicle.info() // green output
@@ -143,38 +145,23 @@ Chronicle will generate convenience methods for all keys provided, with the corr
   chronicle.custom() // cyan output
 ```
 
-These methods can then be called in your application with [logging parameters](https://github.com/abofs/chronicle#logging-parameters).
+These methods can then be called in your application with [logging parameters](#logging-parameters).
 
-Color settings are handled by determining whether your input is a color name, or a hex value (prefixed with **#**). For example, passing `red` as a color setting, will utilize `chalk.red`, while passing `#ff0000` would use `chalk.hex('#ff0000')` instead. A [list of available colors](https://github.com/chalk/chalk#colors) can be found in chalks' documentation. 
+Color settings are handled by determining whether your input is a color name or a hex value (prefixed with **#**). For example, passing `red` as a color setting will utilize `chalk.red`, while passing `#ff0000` would use `chalk.hex('#ff0000')` instead. A [list of available colors](https://github.com/chalk/chalk#colors) can be found in chalks' documentation.
 
-**IMPORTANT**: Please note that although chronicle can be configured to any color through chalk, your output is subject to your terminal's color limitations.
+### The Debug Method
 
-### Advanced Color Setting
-
-Sometimes you may want to do more than just pick a basic color for your output. **chalk** offers a variety of different options, and can be configured via `setColorForType()`. **Chronicle** exposes the chalk instance via `chalk()` so that you don't have to import **chalk** directly into your project. Here is an example of how you can use this method to fully customize your log color setting:
+**Chronicle** allows for the `chronicle.debug()` method to be overridden by a color setting. However, by default we do not define a color for debug and debug is handled differently. For console logging, all **debug** does is output the following:
 
 ```js
-const chronicle = new Chronicle();
+// For logging to console:
+console.dir(content);
 
-chronicle.setColorForType('info', chronicle.chalk().black.bgCyan);
-chronicle.setColorForType('critical', chronicle.chalk().bold.red);
-chronicle.setColorForType('dialog', 'magentaBright');
-chronicle.setColorForType('notice', '#c0c0c0');
-
-chronicle.info('This pre-existing log now has a cyan background and black foreground');
-chronicle.critical('This new log is bold and red');
-chronicle.dialog('This new dialog is bright magenta');
-chronicle.notice('This new log is the hex "#c0c0c0" share of gray');
+// For writing to file:
+JSON.stringify(content, null, 2);
 ```
 
-`setColorForType()` can also be used as an alternative to populating the `additionalLogs` setting in the constructor, as if the setting doesn't already exist, it will then be created.
-
-```js
-const chronicle = new Chronicle();
-
-chronicle.setColorForType('critical', chronicle.chalk().bold.red);
-chronicle.critical('This is a critical error');
-```
+We believe that when wanting to output complicated objects or debug **typescript** applications, there are better methods than utilizing this **Chronicle** package. But for anyone who's fully incorporated **Chronicle** into their project, this function offers some convenience.
 
 ### Logging Parameters
 
@@ -182,16 +169,16 @@ chronicle.critical('This is a critical error');
 chronicle.error('error message', true, false); // content, logToFile, overwrite
 ```
 
-| Parameter | Description |
-| :---: | :--- |
-| `content` | **String** - Content of log that will output on your console. |
-| `logToFile` | **Boolean** *Default: false* - Option to log content to file. |
-| `overwrite` | **Boolean** *Default: false* (*true* for debug method) - Option to overwrite log file, rather than append to it. This option is redundant if logToFile is false.  |
+| Parameter | Type | Default | Description |
+| :---: | :---: | :---: | :--- |
+| `content` | **String** | | Content of log that will output on your console. |
+| `logToFile` | **Boolean** | *false* | Option to log content to file. |
+| `overwrite` | **Boolean** | *false <br> (true on debug())* | Option to overwrite log file, rather than append to it. This option is redundant if logToFile is false.  |
 
-**logToFile** will log to *<project-root>/logs* unless [configured differently](https://github.com/abofs/chronicle#configuration) during instantiation. <br>
+**logToFile** will log to *<project-root>/logs* unless [configured](#configuration) differently during instantiation. <br>
 ### Configuration
 
-When instantiating **chronicle**, you can pass an object to customize your settings. Below is the default configuration:
+When instantiating **Chronicle**, you can pass an object to customize your settings. Below is the default configuration:
 
 ```js
 const chronicle = new Chronicle({
@@ -217,9 +204,57 @@ const chronicle = new Chronicle({
 | `prefix` | **String** | *''* | Prefix string to prepend all log messages for all log types with the exception of *debug*. |
 | `suffix` | **String** | *''* | Suffix string to tack on to all log messages for all log types with the exception of *debug*. |
 | `additionalLogs` | **Object** | | Key value pair object containing log type to color setting for logs that will be merged with `systemLogs` |
-| `systemLogs` | **Object** | | Key value pair object containing log type to color setting for main chronicle logs available in application |
+| `systemLogs` | **Object** | | Key value pair object containing log type to color setting for main **Chronicle** logs available in application |
 
-`additionalLogs` and `systemLogs` are explained with more detail in the [defining logs](https://github.com/abofs/chronicle#defining-logs) and colors section.
+`additionalLogs` and `systemLogs` are explained with more detail in the [defining logs and colors](#defining-logs) section.
+
+### Advanced Configuration
+
+You may want to do more than just pick a basic color for your output. **chalk** offers a variety of different options, and can be configured via `defineType()`. **Chronicle** exposes the chalk instance via `chalk()` so that you don't have to import **chalk** directly into your project. Here is an example of how you can use this method to fully customize your log color setting:
+
+```js
+const chronicle = new Chronicle();
+
+chronicle.defineType('critical', chronicle.chalk().bold.red);
+chronicle.critical('This is a critical error');
+```
+
+Additionally, any [configuration](#configuration) that can be set during instantiation, can also be applied exclusively to any given type by passing in a third **options** parameter.
+
+```js
+// params: type, setting, options
+chronicle.definetype('notice', '#c0c0c0', {
+  prefix: '--------------------------------------------------------------- \n',
+  suffix: '\n=============================================================== \n'
+});
+```
+
+### defineType() params
+| Parameter | Type | Description |
+| :---: | :---: | :--- |
+| `type` | **String** | Create or overwrites a logging function for the given type. |
+| `setting` | **String or Function** | Color setting or chalk function |
+| `options` | **Object** | Configure any setting only to the given type rather than globally. See [configuration](#configuration) for list of options |
+
+
+```js
+const chronicle = new Chronicle();
+
+chronicle.defineType('info', chronicle.chalk().black.bgCyan);
+chronicle.defineType('critical', chronicle.chalk().bold.red);
+chronicle.defineType('dialog', 'magentaBright');
+chronicle.definetype('notice', '#c0c0c0', {
+  prefix: '--------------------------------------------------------------- \n',
+  suffix: '\n=============================================================== \n'
+});
+
+chronicle.info('This pre-existing log now has a cyan background and black foreground');
+chronicle.critical('This new log is bold and red');
+chronicle.dialog('This new dialog is bright magenta');
+chronicle.notice('This new log is the hex "#c0c0c0" share of gray');
+```
+
+`defineType()` can also be used as an alternative to populating the `additionalLogs` setting in the constructor, as if the setting doesn't already exist, it will then be created.
 
 ## Origin
 

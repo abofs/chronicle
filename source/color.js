@@ -21,7 +21,8 @@ export default class Color {
 
   // retrieves chalk color function, and fully validates output
   settingToChalkColorFunction(setting) {
-    const errorMessage = 'Invalid chalk color function. See project README for help with color setting.';
+    const errorMessage = 'Invalid chalk color function.'
+      + 'For help with color settings, see https://github.com/abofs/chronicle#defining-logs--colors';
 
     switch (typeof setting) {
     case 'string':
