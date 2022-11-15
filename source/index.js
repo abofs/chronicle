@@ -50,36 +50,23 @@ export default class Chronicle {
   defineType(type, setting, options=null) {
     this.color.setLogColor(type, setting);
 
-    if (options) {
-      if (typeof options !== 'object') throw 'options param must be an object';
-      const invalidOptions = [];
+    // create convenience method if it doesn't exist
+    if (!this[type]) this.createConvenienceMethod(type);
 
-      // sanitize user input (only store allowed types)
-      for (let option of Object.keys(options)) {
-        if (!optionKeys.includes(option)) {
-          invalidOptions.push(option);
-          delete options[option];
-        }
+    if (!options) return;
+    if (typeof options !== 'object') throw 'The options param must be an object.';
 
-        if (option === 'path') options[option] = this.sanitizePath(options[option]);
+    for (let option of Object.keys(options)) {
+      if (!optionKeys.includes(option)) {
+        throw `${option} is not a valid configuration object.`
+          + '\n For a list of available options, see https://github.com/abofs/chronicle#configuration';
       }
 
-      // warn user about invalid inputs
-      if (invalidOptions.length) {
-        const warnMethod = this.warn || console.warn; // prefer native method unless removed by user
-        warnMethod(`[${invalidOptions.join(', ')}] are not a valid options and will have on ${type} logs.`
-          + '\n For a list of available options, see https://github.com/abofs/chronicle#configuration');
-      }
-
-      if (Object.keys(options).length) {
-        this.typeOptions[type] = options;
-      }
+      // sanitize path input
+      if (option === 'path') options[option] = this.sanitizePath(options[option]);
     }
 
-    // halt if convenience method already exists
-    if (this[type]) return;
-
-    this.createConvenienceMethod(type);
+    this.typeOptions[type] = options;
   }
 
   // proxy through `logAction` method in order to set defaults based on argument presence
@@ -184,7 +171,7 @@ export default class Chronicle {
     const delim = moduleDir.includes('node_modules') ? 'node_modules' : 'source';
     const splitDir = moduleDir.split(delim);
 
-    if (splitDir.length < 2) throw ('Failed to locate your project\'s root directory');
+    if (splitDir.length < 2) throw ('Failed to locate your project\'s root directory.');
 
     // use project root directory behind path
     path = projectPath.resolve(splitDir[0], path);

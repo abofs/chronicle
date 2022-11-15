@@ -184,4 +184,30 @@ module('[Integration] Chronicle Tests', () => {
 
     await removeDirectory(barPath, assert); // cleanup directory
   });
+
+  test('App crashes with descriptive error if user passes a non-object param to for options', async assert => {
+    assert.expect(1); // expect assertion to happen in catch block
+    const chronicle = new Chronicle({ systemLogs: { test: 'green' }});
+
+    try {
+      chronicle.defineType('test', 'yellow', true);
+    } catch (error) {
+      assert.equal(error, 'The options param must be an object.');
+    }
+  });
+
+  test('App crashes with descriptive error when user uses defineType with bad options', async assert => {
+    assert.expect(2); // expect assertions to happen in catch block
+    const chronicle = new Chronicle({ systemLogs: { test: 'green' }});
+
+    try {
+      chronicle.defineType('test', 'yellow', {
+        invalidOption1: true,
+        invalidOption2: true
+      });
+    } catch (error) {
+      assert.ok(error.includes('invalidOption1'), 'Error message includes invalidOption1');
+      assert.notOk(error.includes('invalidOption2'), 'Error message does not include invalidOption2');
+    }
+  });
 });
