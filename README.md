@@ -99,7 +99,7 @@ import Chronicle from '../source/index.js';
 
 const chronicle = new Chronicle({ additionalLogs: { question: 'green' } });
 
-// create additional log with advanced direct chalk configuration
+// create additional log with direct chalk configuration
 chronicle.defineType('query', chronicle.chalk().black.bgGreen);
 
 chronicle.question('What will a fully custom chalk color function look like?');

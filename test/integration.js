@@ -126,7 +126,7 @@ module('[Integration] Chronicle Tests', () => {
     await removeDirectory(path, assert); // cleanup directory
 
     chronicle.test('log to file test', false);
-    await timeout(1500); // allow file and directory up to .5 seconds to be created.
+    await timeout(500); // allow file and directory up to .5 seconds to be created.
     logDirExists = await targetExists(path);
 
     assert.notOk(logDirExists, 'log directory does not exists');
@@ -139,10 +139,10 @@ module('[Integration] Chronicle Tests', () => {
     });
     const { path } = chronicle.options;
 
-    assert.ok(path.includes('test-logs', 'configured directory is correct'));
+    assert.ok(path.includes('test-logs'), 'configured directory is correct');
 
     chronicle.test('log to file test', true);
-    await timeout(1500); // allow file and directory .5 seconds to be created.
+    await timeout(500); // allow file and directory .5 seconds to be created.
     const logDirExists = await targetExists(path);
     const logFileExists = await targetExists(`${path}test.log`);
 
@@ -165,7 +165,7 @@ module('[Integration] Chronicle Tests', () => {
     const barPath = chronicle.typeOptions.bar.path;
 
     chronicle.foo('log with no prefix and suffix, and do not create logs');
-    await timeout(1500); // allow file and directory .5 seconds to be created.
+    await timeout(500); // allow file and directory .5 seconds to be created.
     let logDirExists = await targetExists(path);
     let barLogDirExists = await targetExists(barPath);
 
@@ -173,7 +173,7 @@ module('[Integration] Chronicle Tests', () => {
     assert.notOk(barLogDirExists, 'defineType log directory does not exist');
 
     chronicle.bar('log with timestamp, prefix, suffix, and create custom logs');
-    await timeout(1500); // allow file and directory .5 seconds to be created.
+    await timeout(500); // allow file and directory .5 seconds to be created.
     logDirExists = await targetExists(path);
     barLogDirExists = await targetExists(barPath);
     const logFileExists = await targetExists(`${barPath}bar.log`);

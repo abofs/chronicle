@@ -50,11 +50,25 @@ export default class Chronicle {
   defineType(type, setting, options=null) {
     this.color.setLogColor(type, setting);
 
-    if (options && typeof options === 'object') {
+    if (options) {
+      if (typeof options !== 'object') throw 'options param must be an object';
+      const invalidOptions = [];
+
       // sanitize user input (only store allowed types)
       for (let option of Object.keys(options)) {
-        if (!optionKeys.includes(option)) delete options[option];
+        if (!optionKeys.includes(option)) {
+          invalidOptions.push(option);
+          delete options[option];
+        }
+
         if (option === 'path') options[option] = this.sanitizePath(options[option]);
+      }
+
+      // warn user about invalid inputs
+      if (invalidOptions.length) {
+        const warnMethod = this.warn || console.warn; // prefer native method unless removed by user
+        warnMethod(`[${invalidOptions.join(', ')}] are not a valid options and will have on ${type} logs.`
+          + '\n For a list of available options, see https://github.com/abofs/chronicle#configuration');
       }
 
       if (Object.keys(options).length) {
@@ -138,7 +152,7 @@ export default class Chronicle {
 
   // attempts to create file and/or directory if they don't already exist
   async validateFileAndDirectory(path, targetLog) {
-    const errorMethod = this.error ? this.error : console.error; // prefer native method unless removed by user
+    const errorMethod = this.error || console.error; // prefer native method unless removed by user
 
     /*
      * TODO: Fix known bug
