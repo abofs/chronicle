@@ -1,7 +1,7 @@
 {
-  "name": "@abofs/chronicle",
+  "name": "node-chronicle",
   "version": "0.0.1",
-  "description": "Flexible logging utility for node applications.",
+  "description": "Simplified logging for node applications",
   "type": "module",
   "main": "source/index.js",
   "scripts": {
@@ -15,10 +15,15 @@
   "keywords": [
     "log",
     "logging",
-    "debug",
     "color-coding",
+    "chronicle",
+    "history",
+    "documentation",
+    "document",
     "chalk",
-    "clean-output"
+    "clean-output",
+    "terminal",
+    "debug"
   ],
   "author": "Stone Costa",
   "license": "ISC",
