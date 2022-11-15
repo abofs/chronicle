@@ -200,7 +200,7 @@ const chronicle = new Chronicle({
 | :---: | :---: | :---: | :--- |
 | `logToFileByDefault` | **Boolean** | *false* | Option to change default setting for `logToFile` parameter of logging functions. |
 | `logTimestamp` | **Boolean** | *false* | Option to include timestamp in console logging. Timestamps are automatically included in file logs. |
-| `path` | **String** | *'logs/*'* | Path in which to store log files. This setting is relative to your project's root directory. |
+| `path` | **String** | *'logs/'* | Path in which to store log files. This setting is relative to your project's root directory. |
 | `prefix` | **String** | *''* | Prefix string to prepend all log messages for all log types with the exception of *debug*. |
 | `suffix` | **String** | *''* | Suffix string to tack on to all log messages for all log types with the exception of *debug*. |
 | `additionalLogs` | **Object** | | Key value pair object containing log type to color setting for logs that will be merged with `systemLogs` |
