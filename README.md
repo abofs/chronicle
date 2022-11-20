@@ -103,7 +103,7 @@ const chronicle = new Chronicle({ additionalLogs: { question: 'green' } });
 chronicle.defineType('query', chronicle.chalk().black.bgGreen);
 
 chronicle.question('What will a fully custom chalk color function look like?');
-await chronicle.query('This is what a custom chalk color setting looks like'), true;
+await chronicle.query('This is what a custom chalk color setting looks like', true);
 ```
 ![](https://github.com/abofs/chronicle/raw/master/media/examples/additional-logs.jpg)
 
