@@ -103,7 +103,7 @@ const chronicle = new Chronicle({ additionalLogs: { question: 'green' } });
 chronicle.defineType('query', chronicle.chalk().black.bgGreen);
 
 chronicle.question('What will a fully custom chalk color function look like?');
-chronicle.query('This is what a custom chalk color setting looks like');
+await chronicle.query('This is what a custom chalk color setting looks like', true);
 ```
 ![](https://github.com/abofs/chronicle/raw/master/media/examples/additional-logs.jpg)
 
@@ -148,6 +148,16 @@ You can add to a new log/color setting by passing the `additionalLogs` option to
 These methods can then be called in your application with [logging parameters](#logging-parameters).
 
 Color settings are handled by determining whether your input is a color name or a hex value (prefixed with **#**). For example, passing `red` as a color setting will utilize `chalk.red`, while passing `#ff0000` would use `chalk.hex('#ff0000')` instead. A [list of available colors](https://github.com/chalk/chalk#colors) can be found in chalks' documentation.
+
+Additionally, these methods return a promise when `logToFile` is true, allowing you use them with `await` in an async method, or append `then(), catch(), or finally()` for more advanced callback usage.
+
+```js
+async method() {
+  await chronicle.error('error message', true);
+
+  // do something after logs/error.log (default) is created
+}
+```
 
 ### The Debug Method
 

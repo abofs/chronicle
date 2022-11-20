@@ -115,7 +115,7 @@ export default class Chronicle {
 
     if (!logToFile) return;
 
-    this.writeToFile(type, `${timestamp} ${content}\n`, overwrite);
+    return this.writeToFile(type, `${timestamp} ${content}\n`, overwrite);
   }
 
   // direct hardcoded debug method (log to file functionality is limited)
@@ -124,7 +124,7 @@ export default class Chronicle {
 
     if (!logToFile) return;
 
-    this.writeToFile('debug', JSON.stringify(content, null, 2), overwrite);
+    return this.writeToFile('debug', JSON.stringify(content, null, 2), overwrite);
   }
 
   async writeToFile(type, content, overwrite) {
