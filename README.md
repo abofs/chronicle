@@ -149,6 +149,16 @@ These methods can then be called in your application with [logging parameters](#
 
 Color settings are handled by determining whether your input is a color name or a hex value (prefixed with **#**). For example, passing `red` as a color setting will utilize `chalk.red`, while passing `#ff0000` would use `chalk.hex('#ff0000')` instead. A [list of available colors](https://github.com/chalk/chalk#colors) can be found in chalks' documentation.
 
+Additionally, these methods will also return promise when `logToFile` is true, allowing you use it with `await` in an async method, or tack on `then(), catch(), finally()` for more advanced usage that needs to interact with the log file.
+
+```js
+async method() {
+  await chronicle.error('error message');
+
+  // do something with logs/error.log
+}
+```
+
 ### The Debug Method
 
 **Chronicle** allows for the `chronicle.debug()` method to be overridden by a color setting. However, by default we do not define a color for debug and debug is handled differently. For console logging, all **debug** does is output the following:

@@ -47,7 +47,7 @@ export default class Chronicle {
   }
 
   // records setting and options for log type, and crates convenience method ie: chronicle.info()
-  defineType(type, setting, options=null) {
+  defineType(type, setting, options = null) {
     this.color.setLogColor(type, setting);
 
     // create convenience method if it doesn't exist
@@ -59,7 +59,7 @@ export default class Chronicle {
     for (let option of Object.keys(options)) {
       if (!optionKeys.includes(option)) {
         throw `${option} is not a valid configuration object.`
-          + '\n For a list of available options, see https://github.com/abofs/chronicle#configuration';
+        + '\n For a list of available options, see https://github.com/abofs/chronicle#configuration';
       }
 
       // sanitize path input
@@ -115,7 +115,7 @@ export default class Chronicle {
 
     if (!logToFile) return;
 
-    this.writeToFile(type, `${timestamp} ${content}\n`, overwrite);
+    return this.writeToFile(type, `${timestamp} ${content}\n`, overwrite);
   }
 
   // direct hardcoded debug method (log to file functionality is limited)
@@ -124,7 +124,7 @@ export default class Chronicle {
 
     if (!logToFile) return;
 
-    this.writeToFile('debug', JSON.stringify(content, null, 2), overwrite);
+    return this.writeToFile('debug', JSON.stringify(content, null, 2), overwrite);
   }
 
   async writeToFile(type, content, overwrite) {
@@ -175,7 +175,7 @@ export default class Chronicle {
 
     // use project root directory behind path
     path = projectPath.resolve(splitDir[0], path);
-    
+
     // force path property to contain a trailing "/"
     if (path[path.length - 1] !== '/') {
       path += '/';
