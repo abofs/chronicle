@@ -1,3 +1,8 @@
+# internals
+/media/
+/examples/
+/test/
+
 # dependencies
 /node_modules/
 
