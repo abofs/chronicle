@@ -202,7 +202,7 @@ module('[Integration] Chronicle Tests', () => {
     try {
       chronicle.defineType('test', 'yellow', {
         invalidOption1: true,
-        invalidOption2: true
+        invalidOption2: true,
       });
     } catch (error) {
       assert.ok(error.includes('invalidOption1'), 'Error message includes invalidOption1');

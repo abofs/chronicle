@@ -1,4 +1,4 @@
-import { promises as fsp } from 'fs';
+import { mkdirSync, promises as fsp } from 'fs';
 import { fileURLToPath } from 'url';
 import projectPath from 'path';
 import Color from './color.js';
@@ -47,7 +47,7 @@ export default class Chronicle {
   }
 
   // records setting and options for log type, and crates convenience method ie: chronicle.info()
-  defineType(type, setting, options=null) {
+  defineType(type, setting, options = null) {
     this.color.setLogColor(type, setting);
 
     // create convenience method if it doesn't exist
@@ -59,7 +59,7 @@ export default class Chronicle {
     for (let option of Object.keys(options)) {
       if (!optionKeys.includes(option)) {
         throw `${option} is not a valid configuration object.`
-          + '\n For a list of available options, see https://github.com/abofs/chronicle#configuration';
+        + '\n For a list of available options, see https://github.com/abofs/chronicle#configuration';
       }
 
       // sanitize path input
@@ -141,26 +141,12 @@ export default class Chronicle {
   async validateFileAndDirectory(path, targetLog) {
     const errorMethod = this.error || console.error; // prefer native method unless removed by user
 
-    /*
-     * TODO: Fix known bug
-     * Due to the asynchronous nature of these calls, when trying to run log write files at the same time,
-     * we will encounter some issues, because fsp.access will fail while mkdir or writeFile is pending.
-     * There are a few different ways to go about this, i think creating a queue system for matching path/targetLogs
-     * can mitigate this edge case, while still allowing other future logs to write asynchronously.
-     *
-     * We do NOT want to fix this by removing the async feature.
-     */
-    const tempNotice = 'If directories are being created, you can ignore this error';
-
-    await fsp.access(path).catch(() => {
-      fsp.mkdir(path).catch(() => {
-        errorMethod(`Failed to create configured directory: ${path} (${tempNotice})`);
-      });
-    });
+    mkdirSync(path, { recursive: true });
 
     await fsp.access(targetLog).catch(() => {
       fsp.writeFile(targetLog, '').catch(() => {
-        errorMethod(`Failed to create log file: ${targetLog} (${tempNotice})`);
+        errorMethod(`Failed to create log file: ${targetLog}.`
+          + '\n Verify that the application runner has write permissions');
       });
     });
   }
@@ -175,7 +161,7 @@ export default class Chronicle {
 
     // use project root directory behind path
     path = projectPath.resolve(splitDir[0], path);
-    
+
     // force path property to contain a trailing "/"
     if (path[path.length - 1] !== '/') {
       path += '/';
