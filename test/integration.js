@@ -64,7 +64,7 @@ module('[Integration] Chronicle Tests', () => {
   });
 
   test('Log creation respects the default logToFileByDefault as false', async assert => {
-    const chronicle = new Chronicle({ systemLogs: { test: 'green' } });
+    const chronicle = new Chronicle({ systemLogs: { test: 'green' }});
     const { path } = chronicle.options;
 
     let logDirExists = await targetExists(path);
@@ -138,7 +138,7 @@ module('[Integration] Chronicle Tests', () => {
   });
 
   test('Log creation respects type specific options set via defineType', async assert => {
-    const chronicle = new Chronicle({ systemLogs: { foo: 'green' } });
+    const chronicle = new Chronicle({ systemLogs: { foo: 'green' }});
     const { path } = chronicle.options;
     chronicle.defineType('bar', 'yellow', {
       logToFileByDefault: true,
@@ -170,7 +170,7 @@ module('[Integration] Chronicle Tests', () => {
 
   test('App crashes with descriptive error if user passes a non-object param to for options', async assert => {
     assert.expect(1); // expect assertion to happen in catch block
-    const chronicle = new Chronicle({ systemLogs: { test: 'green' } });
+    const chronicle = new Chronicle({ systemLogs: { test: 'green' }});
 
     try {
       chronicle.defineType('test', 'yellow', true);
@@ -181,7 +181,7 @@ module('[Integration] Chronicle Tests', () => {
 
   test('App crashes with descriptive error when user uses defineType with bad options', async assert => {
     assert.expect(2); // expect assertions to happen in catch block
-    const chronicle = new Chronicle({ systemLogs: { test: 'green' } });
+    const chronicle = new Chronicle({ systemLogs: { test: 'green' }});
 
     try {
       chronicle.defineType('test', 'yellow', {
