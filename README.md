@@ -47,7 +47,7 @@ npm install node-chronicle
 ## Usage
 
 ```js
-import Chronicle from 'chronicle';
+import Chronicle from 'node-chronicle';
 
 const chronicle = new Chronicle();
 
@@ -59,7 +59,7 @@ chronicle.error('Error: no application logic detected', true); // logs to logs/e
 Easily define your own logging mechanism and color-coding preference:
 
 ```js
-import Chronicle from 'chronicle';
+import Chronicle from 'node-chronicle';
 
 const chronicle = new Chronicle({
   systemLogs: {
@@ -77,7 +77,7 @@ chronicle.red('Error: using custom method red, no application logic detected', f
 Customize logging options to best suit your project
 
 ```js
-import Chronicle from 'chronicle';
+import Chronicle from 'node-chronicle';
 
 const chronicle = new Chronicle({
   logToFileByDefault: true,
